@@ -14,13 +14,20 @@ const Header = () => {
     <div className="py-4 flex justify-between items-center w-full px-4 md:px-8">
       {/* Logo */}
       <Link to="/" className="ml-0">
-        <img src={Logo} alt="Logo" className="h-12 md:h-16" style={{ marginLeft: "-5rem" }}/>
+        <img
+          src={Logo}
+          alt="Logo"
+          className="h-12 md:h-16"
+          style={{ marginLeft: "-5rem" }}
+        />
       </Link>
 
       {/* Desktop Navigation */}
       <ul className="hidden md:flex font-medium items-center gap-5">
         <li>
-          <Button variant="link">Home</Button>
+          <Link to="/">
+            <Button variant="link">Home</Button>
+          </Link>
         </li>
         <li>
           <Button variant="link">Jobs</Button>
@@ -41,7 +48,7 @@ const Header = () => {
         <Menu className="h-6 w-6" />
       </button>
 
-      {/* User Actions */}
+      {/* User Actions for Desktop (only if user is logged in) */}
       {user && (
         <Popover>
           <PopoverTrigger asChild>
@@ -80,36 +87,66 @@ const Header = () => {
         <div className="absolute top-16 right-0 w-3/4 bg-gray-900 text-white shadow-lg p-4 flex flex-col gap-4 md:hidden">
           <ul className="flex flex-col items-start gap-3">
             <li>
-              <Button variant="link" onClick={() => setIsMobileMenuOpen(false)} className="text-white">
-                Home
-              </Button>
+              <Link to="/">
+                <Button
+                  variant="link"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-white"
+                >
+                  Home
+                </Button>
+              </Link>
             </li>
             <li>
-              <Button variant="link" onClick={() => setIsMobileMenuOpen(false)} className="text-white">
+              <Button
+                variant="link"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-white"
+              >
                 Jobs
               </Button>
             </li>
             <li>
-              <Button variant="link" onClick={() => setIsMobileMenuOpen(false)} className="text-white">
+              <Button
+                variant="link"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-white"
+              >
                 Browse
               </Button>
             </li>
             <li>
-              <Button variant="link" onClick={() => setIsMobileMenuOpen(false)} className="text-white">
+              <Button
+                variant="link"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-white"
+              >
                 Our Team
               </Button>
             </li>
           </ul>
           {!user ? (
             <div className="flex flex-col gap-3">
-              <Button variant="outline" onClick={() => setIsMobileMenuOpen(false)}>
-                Login
-              </Button>
-              <Button onClick={() => setIsMobileMenuOpen(false)}>SignUp</Button>
+              <Link to="/login">
+                <Button
+                  variant="outline"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Login
+                </Button>
+              </Link>
+              <Link to="/signup">
+                <Button onClick={() => setIsMobileMenuOpen(false)}>
+                  SignUp
+                </Button>
+              </Link>
             </div>
           ) : (
             <div className="flex flex-col gap-3">
-              <Button variant="outline" onClick={() => setIsMobileMenuOpen(false)}>
+              <Button
+                variant="outline"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
                 Logout
               </Button>
             </div>
