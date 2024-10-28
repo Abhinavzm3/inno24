@@ -1,6 +1,13 @@
-// application.route.js
-const applicationRoute = (req, res) => {
-    res.send("Hello from application route");
-};
+import express from "express";
+import { login, logout, register, updateProfile } from "../controllers/user.controller.js";
+import isAuthenticated from "../middlewares/isAuthenticated.js";
+import { singleUpload } from "../middlewares/mutler.js";
+ 
+const router = express.Router();
 
-export default applicationRoute;
+router.route("/register").post(singleUpload,register);
+router.route("/login").post(login);
+router.route("/logout").get(logout);
+router.route("/profile/update").post(isAuthenticated,singleUpload,updateProfile);
+
+export default router;
