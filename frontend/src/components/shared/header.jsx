@@ -8,7 +8,7 @@ import { LogOut, User2, Menu } from "lucide-react";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const user = true;
+  const user = false;
 
   return (
     <div className="py-4 flex justify-between items-center w-full px-4 md:px-8">
@@ -39,6 +39,18 @@ const Header = () => {
           <Button variant="link">Our Team</Button>
         </li>
       </ul>
+
+      {/* User Actions for Desktop (when user is false) */}
+      {!user && (
+        <div className="hidden md:flex items-center gap-4">
+          <Link to="/login">
+            <Button variant="outline">Login</Button>
+          </Link>
+          <Link to="/signup">
+            <Button>SignUp</Button>
+          </Link>
+        </div>
+      )}
 
       {/* Mobile Menu Toggle */}
       <button
