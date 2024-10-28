@@ -8,164 +8,81 @@ import { LogOut, User2, Menu } from "lucide-react";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const user = false;
+  const user = false; 
 
   return (
-    <div className="py-4 flex justify-between items-center w-full px-4 md:px-8">
-      {/* Logo */}
-      <Link to="/" className="ml-0">
-        <img
-          src={Logo}
-          alt="Logo"
-          className="h-12 md:h-16"
-          style={{ marginLeft: "-5rem" }}
-        />
+
+    <nav className="flex items-center justify-between bg-gray-900 bg-opacity-80 p-5 shadow-lg fixed w-full h-16 z-50 ">
+      <Link to="/" className="flex items-center space-x-2">
+        <img src='src/assets/logo.png' alt="Logo" className="h-32 w-32 mt-12" />
+       
       </Link>
 
-      {/* Desktop Navigation */}
-      <ul className="hidden md:flex font-medium items-center gap-5">
-        <li>
-          <Link to="/">
-            <Button variant="link">Home</Button>
-          </Link>
-        </li>
-        <li>
-          <Button variant="link">Jobs</Button>
-        </li>
-        <li>
-          <Button variant="link">Browse</Button>
-        </li>
-        <li>
-          <Button variant="link">Our Team</Button>
-        </li>
+      <ul className="hidden md:flex space-x-6">
+        {["Home", "Jobs", "Browse", "Our Team"].map((item) => (
+          <li key={item} className="text-white text-lg hover:text-cyan-400 transition duration-300 cursor-pointer">
+            {item}
+          </li>
+        ))}
       </ul>
 
-      {/* User Actions for Desktop (when user is false) */}
-      {!user && (
-        <div className="hidden md:flex items-center gap-4">
-          <Link to="/login">
-            <Button variant="outline">Login</Button>
-          </Link>
-          <Link to="/signup">
-            <Button>SignUp</Button>
-          </Link>
-        </div>
-      )}
-
-      {/* Mobile Menu Toggle */}
-      <button
-        className="md:hidden flex items-center"
-        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-      >
-        <Menu className="h-6 w-6" />
-      </button>
-
-      {/* User Actions for Desktop (only if user is logged in) */}
-      {user && (
-        <Popover>
-          <PopoverTrigger asChild>
-            <Avatar className="cursor-pointer md:ml-4">
-              <AvatarImage src="https://github.com/shadcn.png" />
-            </Avatar>
-          </PopoverTrigger>
-          <PopoverContent className="w-80 translate-y-1">
-            <div className="flex gap-4 space-y-2">
+      <div className="hidden md:flex items-center space-x-4">
+        {!user ? (
+          <>
+            <Link to="/login">
+              <Button variant="outline">Login</Button>
+            </Link>
+            <Link to="/signup">
+              <Button>SignUp</Button>
+            </Link>
+          </>
+        ) : (
+          <Popover>
+            <PopoverTrigger asChild>
               <Avatar className="cursor-pointer">
                 <AvatarImage src="https://github.com/shadcn.png" />
               </Avatar>
-              <div>
-                <h4 className="font-medium">IronMan</h4>
-                <p className="text-sm text-muted-foreground">
-                  Lorem ipsum dolor sit amet consectetur
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-col gap-3 text-gray-300 my-2">
-              <div className="flex w-fit items-center gap-2 cursor-pointer">
-                <User2 />
-                <Button variant="link">View Profile</Button>
-              </div>
-              <div className="flex w-fit items-center gap-2 cursor-pointer">
-                <LogOut />
+            </PopoverTrigger>
+            <PopoverContent className="w-40 p-2 text-center text-white">
+              <div className="flex flex-col space-y-2">
+                <Link to="/profile">
+                  <Button variant="link">Profile</Button>
+                </Link>
                 <Button variant="outline">Logout</Button>
               </div>
-            </div>
-          </PopoverContent>
-        </Popover>
-      )}
+            </PopoverContent>
+          </Popover>
+        )}
+      </div>
 
-      {/* Mobile Menu */}
+      <button className="md:hidden" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+        <Menu className="text-white h-6 w-6" />
+      </button>
+
       {isMobileMenuOpen && (
-        <div className="absolute top-16 right-0 w-3/4 bg-gray-900 text-white shadow-lg p-4 flex flex-col gap-4 md:hidden">
-          <ul className="flex flex-col items-start gap-3">
-            <li>
-              <Link to="/">
-                <Button
-                  variant="link"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-white"
-                >
-                  Home
-                </Button>
-              </Link>
-            </li>
-            <li>
-              <Button
-                variant="link"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-white"
-              >
-                Jobs
-              </Button>
-            </li>
-            <li>
-              <Button
-                variant="link"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-white"
-              >
-                Browse
-              </Button>
-            </li>
-            <li>
-              <Button
-                variant="link"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-white"
-              >
-                Our Team
-              </Button>
-            </li>
-          </ul>
+        <div className="absolute top-16 right-0 w-3/4 bg-gray-900 text-white shadow-lg p-4 flex flex-col space-y-4 md:hidden">
+          {["Home", "Jobs", "Heroes", "Profile"].map((item) => (
+            <Link key={item} to="/" onClick={() => setIsMobileMenuOpen(false)}>
+              <Button variant="link" className="w-full text-left text-white hover:text-cyan-400">{item}</Button>
+            </Link>
+          ))}
           {!user ? (
-            <div className="flex flex-col gap-3">
-              <Link to="/login">
-                <Button
-                  variant="outline"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Login
-                </Button>
+            <>
+              <Link to="/login" onClick={() => setIsMobileMenuOpen(false)}>
+                <Button variant="outline" className="w-full">Login</Button>
               </Link>
-              <Link to="/signup">
-                <Button onClick={() => setIsMobileMenuOpen(false)}>
-                  SignUp
-                </Button>
+              <Link to="/signup" onClick={() => setIsMobileMenuOpen(false)}>
+                <Button className="w-full">SignUp</Button>
               </Link>
-            </div>
+            </>
           ) : (
-            <div className="flex flex-col gap-3">
-              <Button
-                variant="outline"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Logout
-              </Button>
-            </div>
+            <Button variant="outline" className="w-full" onClick={() => setIsMobileMenuOpen(false)}>
+              Logout
+            </Button>
           )}
         </div>
       )}
-    </div>
+    </nav>
   );
 };
 
