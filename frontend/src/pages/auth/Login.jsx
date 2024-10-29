@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { setLoading } from "@/redux/authSlice";
+import { setLoading, setUser } from "@/redux/authSlice";
 import store from "@/redux/store";
 import { RadioGroup } from "@radix-ui/react-radio-group";
 import axios from "axios";
@@ -36,6 +36,7 @@ const Login = () => {
         withCredentials: true,
       });
       if (res.data.success) {
+        dispatch(setUser(res.data.user));
         navigate("/");
         toast.success(res.data.message);
       }
