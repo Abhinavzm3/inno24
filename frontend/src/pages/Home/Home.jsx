@@ -1,4 +1,8 @@
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Search } from 'lucide-react';
 import  { useState, useEffect } from 'react';
+import CategoryCarousel from './CategoryCarousel';
 
 const avengerImages = [
   '/images/_947f2c86-07ef-411d-a1d0-14f647879ced.jpg',
@@ -67,11 +71,13 @@ const Home = () => {
               placeholder="Enter Job Title or Skills"
               className="bg-transparent border-none outline-none placeholder-gray-400 text-white w-64 animate-bounce"
             />
-            <button className="bg-cyan-500 hover:bg-cyan-400 text-black px-6 py-2 rounded-full font-bold transition duration-300">
-              Search
-            </button>
+            <Button className="bg-cyan-500 hover:bg-cyan-400 text-black px-6 py-2 rounded-full font-bold transition duration-300">
+              <Search className='h-5 w-6'/>
+            </Button>
           </div>
-        </div>
+        </div> 
+
+        <CategoryCarousel />
 
         {/* Department Section */}
         {/* <section className="py-20 bg-gray-900 custom-cursor"> */}
@@ -153,8 +159,8 @@ const Home = () => {
             Ready to join the fight? Sign up or log in to apply for exclusive positions with the Avengers. Make a difference and become a part of something bigger.
           </p>
           <div className="flex justify-center space-x-4">
-            <button className="px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-black rounded-full font-bold transition duration-300">Sign Up</button>
-            <button className="px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-black rounded-full font-bold transition duration-300">Log In</button>
+            <Button className="px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-black rounded-full font-bold transition duration-300">Sign Up</Button>
+            <Button className="px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-black rounded-full font-bold transition duration-300">Log In</Button>
           </div>
         </section>
 
