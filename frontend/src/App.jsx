@@ -7,6 +7,8 @@ import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import Jobs from "./pages/Jobs/Jobs";
 import OurTeam from "./pages/OurTeam";
+import Browse from "./pages/Browse/Browse";
+import Profile from "./pages/Profile/Profile";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +33,14 @@ const router = createBrowserRouter([
       {
         path: "/our-team",
         element: <OurTeam />,
+      },
+      {
+        path: "/browse",
+        element: <Browse />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
     ],
   },

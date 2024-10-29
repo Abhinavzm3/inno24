@@ -5,10 +5,11 @@ import { Button } from "../ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Avatar, AvatarImage } from "../ui/avatar";
 import { LogOut, User2, Menu } from "lucide-react";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const user = false;
+  const {user} =useSelector(store => store.auth);
 
   return (
     <nav className="flex items-center justify-between bg-gray-900 bg-opacity-80 p-5 shadow-lg sticky h-16 z-50 ">
@@ -67,7 +68,7 @@ const Header = () => {
               <div className="flex flex-col gap-3 text-gray-300 my-2">
                 <div className="flex w-fit items-center gap-2 cursor-pointer">
                   <User2 />
-                  <Button variant="link">View Profile</Button>
+                  <Button variant="link"><Link to="/profile">View Profile</Link></Button>
                 </div>
                 <div className="flex w-fit items-center gap-2 cursor-pointer">
                   <LogOut />
