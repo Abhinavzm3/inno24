@@ -6,6 +6,7 @@ import AppLayout from "./layout/app-layout";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import Jobs from "./pages/Jobs/Jobs";
+import OurTeam from "./pages/OurTeam";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "/jobs",
         element: <Jobs />,
+      },
+      {
+        path: "/our-team",
+        element: <OurTeam />,
       },
     ],
   },
