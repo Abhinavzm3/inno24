@@ -20,7 +20,7 @@ const Profile = () => {
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-4">
             <Avatar className="h-24 w-24">
-              <AvatarImage src="/images/heroes/iron.png" />
+              <AvatarImage src={user?.profile?.profilePhoto} />
             </Avatar>
             <div>
               <h1 className="font-medium text-xl">{user?.fullname} </h1>
@@ -62,7 +62,7 @@ const Profile = () => {
                 href={user?.profile?.resume}
                 className="text-blue-700 w-full hocer:underline cursor-pointer"
               >
-                ]{user?.profile?.resumeOriginalName}
+                {user?.profile?.resumeOriginalName}
               </a>
             ) : (
               <span>NA</span>

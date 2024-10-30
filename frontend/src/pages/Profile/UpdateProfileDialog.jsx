@@ -9,6 +9,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { USER_API_END_POINT } from "@/lib/utils/constant";
+import { setUser } from "@/redux/authSlice";
 import axios from "axios";
 import { Loader2 } from "lucide-react";
 import React, { useState } from "react";
@@ -17,14 +18,14 @@ import { toast } from "sonner";
 
 const UpdateProfileDialog = ({ open, setOpen }) => {
   const [loading, setLoading] = useState(false);
-  const { user } = useSelector((store) => store.auth);
+  const { user } = useSelector(store => store.auth);
 
   const [input, setInput] = useState({
-    fullName: user?.fullName,
+    fullname: user?.fullname,
     email: user?.email,
     phoneNumber: user?.phoneNumber,
     bio: user?.profile?.bio,
-    skills: user?.profile?.skills?.map((skill) => skill),
+    skills: user?.profile?.skills?.map(skill => skill),
     file: user?.profile?.resume,
   });
 
@@ -42,7 +43,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
   const submitHandler = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("fullName", input.fullName);
+    formData.append("fullname", input.fullname);
     formData.append("email", input.email);
     formData.append("phoneNumber", input.phoneNumber);
     formData.append("bio", input.bio);
@@ -92,9 +93,9 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
                 </Label>
                 <Input
                   id="name"
-                  name="name"
+                  name="fullname"
                   type="text"
-                  value={input.fullName}
+                  value={input.fullname}
                   onChange={changeEventHandler}
                   className="col-span-3"
                 />
@@ -120,7 +121,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
                 </Label>
                 <Input
                   id="number"
-                  name="number"
+                  name="phoneNumber"
                   value={input.phoneNumber}
                   onChange={changeEventHandler}
                   className="col-span-3"
