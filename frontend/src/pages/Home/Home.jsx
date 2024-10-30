@@ -4,6 +4,8 @@ import { Search } from "lucide-react";
 import { useState, useEffect } from "react";
 import CategoryCarousel from "./CategoryCarousel";
 import TestimonialCarousel from "./TestimonialCarousel";
+import useGetAllJobs from "../hooks/useGetAllJobs";
+import LatestJobs from "../Jobs/LatestJobs";
 
 
 const avengerImages = [
@@ -15,6 +17,8 @@ const avengerImages = [
 ];
 
 const Home = () => {
+
+  useGetAllJobs();
   const [currentImage, setCurrentImage] = useState(0);
 
   useEffect(() => {
@@ -67,6 +71,7 @@ const Home = () => {
           </div>
 
           <CategoryCarousel />
+          <LatestJobs />
 
           {/* Department Section */}
           {/* <section className="py-20 bg-gray-900 custom-cursor"> */}
@@ -118,6 +123,8 @@ const Home = () => {
           <h2 className="text-4xl text-center text-cyan-400 font-bold tracking-wide mb-10">
             Hero Testimonials
           </h2>
+
+
          <TestimonialCarousel />
           {/* </section> */}
 

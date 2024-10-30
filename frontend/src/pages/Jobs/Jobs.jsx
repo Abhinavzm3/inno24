@@ -2,10 +2,13 @@ import React from "react";
 import FilterCard from "./FilterCard";
 import Job from "./Job";
 import * as Dialog from "@radix-ui/react-dialog";
+import { useSelector } from "react-redux";
 
 const jobsArray = [1, 2, 3, 4, 5, 6, 7, 8];
 
 const Jobs = () => {
+  const {allJobs} = useSelector(store => store.job);
+
   return (
     <div className="max-w-7xl mx-auto mt-5">
       {/* Drawer for smaller screens using Radix UI */}
@@ -37,13 +40,15 @@ const Jobs = () => {
         </div>
         
         <div className="flex-1 h-[88vh] overflow-y-auto pb-5">
-          {jobsArray.length <= 0 ? (
+          {
+          allJobs.length <= 0 ? (
             <span>Job Not Found</span>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              {jobsArray.map((items, index) => (
-                <div key={index}>
-                  <Job />
+              {
+              allJobs.map((job) => (
+                <div key={job?._id}>
+                  <Job job={job} />
                 </div>
               ))}
             </div>
