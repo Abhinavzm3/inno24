@@ -14,12 +14,14 @@ import { toast } from "sonner";
 const Signup = () => {
   const [input, setInput] = useState({
     fullname: "",
+    email: "",
+    phoneNumber: "",
     password: "",
     role: "",
     file: "",
   });
 
-  const {loading} = useSelector(store => store.auth);
+  const { loading } = useSelector(store => store.auth);
 
   const navigate = useNavigate();
 
@@ -31,13 +33,16 @@ const Signup = () => {
   const changeFileHandler = (e) => {
     setInput({ ...input, file: e.target.files[0] });
   };
+  const changeEventHandler = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
+}
 
   const submitHandler = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("fullname", input.fullname);
     formData.append("email", input.email);
-    formData.append("phoneNumber", input.fullname);
+    formData.append("phoneNumber", input.phoneNumber);
     formData.append("password", input.password);
     formData.append("role", input.role);
     if (input.file) {
@@ -58,7 +63,7 @@ const Signup = () => {
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.message);
-    } finally{
+    } finally {
       dispatch(setLoading(false));
     }
   };
@@ -91,6 +96,16 @@ const Signup = () => {
           />
         </div>
         <div className="my-2">
+          <Label>Phone Number</Label>
+          <Input
+            type="text"
+            value={input.phoneNumber}
+            name="phoneNumber"
+            onChange={changeEventHandler}
+            placeholder="8080808080"
+          />
+        </div>
+        <div className="my-2">
           <Label>Password</Label>
           <Input
             type="password"
@@ -106,7 +121,7 @@ const Signup = () => {
               <Input
                 type="radio"
                 name="role"
-                value="Student"
+                value="student"
                 checked={input.role === "Student"}
                 onChange={handleChange}
                 className="cursor-pointer"
@@ -117,7 +132,7 @@ const Signup = () => {
               <Input
                 type="radio"
                 name="role"
-                value="Recruiter"
+                value="recruiter"
                 checked={input.role === "Recruiter"}
                 onChange={handleChange}
                 className="cursor-pointer"

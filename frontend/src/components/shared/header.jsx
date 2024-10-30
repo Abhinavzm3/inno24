@@ -1,15 +1,35 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "@/assets/logo-no-background.svg";
 import { Button } from "../ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Avatar, AvatarImage } from "../ui/avatar";
 import { LogOut, User2, Menu } from "lucide-react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { USER_API_END_POINT } from "@/lib/utils/constant";
+import { setUser } from "@/redux/authSlice";
+import { toast } from "sonner";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const {user} =useSelector(store => store.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const logoutHandler = async () => {
+    try {
+      const res = await axios.get(`${USER_API_END_POINT}/logout`, {withCredentials:true});
+      if(res.data.success){
+        dispatch(setUser(null));
+        navigate("/");
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message); 
+    }
+  }
 
   return (
     <nav className="flex items-center justify-between bg-gray-900 bg-opacity-80 p-5 shadow-lg sticky h-16 z-50 ">
@@ -50,18 +70,18 @@ const Header = () => {
           <Popover>
             <PopoverTrigger asChild>
               <Avatar className="cursor-pointer md:ml-4">
-                <AvatarImage src="https://github.com/shadcn.png" />
+                <AvatarImage src={user?.profile?.profilePhoto} />
               </Avatar>
             </PopoverTrigger>
             <PopoverContent className="w-80 translate-y-1">
               <div className="flex gap-4 space-y-2">
                 <Avatar className="cursor-pointer">
-                  <AvatarImage src="https://github.com/shadcn.png" />
+                  <AvatarImage src="{user?.profile?.profilePhoto}" />
                 </Avatar>
                 <div>
-                  <h4 className="font-medium">IronMan</h4>
+                  <h4 className="font-medium">{user?.fullname}</h4>
                   <p className="text-sm text-muted-foreground">
-                    Lorem ipsum dolor sit amet consectetur
+                    {user?.profile?.bio}
                   </p>
                 </div>
               </div>
@@ -72,7 +92,7 @@ const Header = () => {
                 </div>
                 <div className="flex w-fit items-center gap-2 cursor-pointer">
                   <LogOut />
-                  <Button variant="outline">Logout</Button>
+                  <Button onClick={logoutHandler} variant="outline">Logout</Button>
                 </div>
               </div>
             </PopoverContent>

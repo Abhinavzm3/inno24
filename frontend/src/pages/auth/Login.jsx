@@ -1,14 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { USER_API_END_POINT } from "@/lib/utils/constant";
 import { setLoading, setUser } from "@/redux/authSlice";
-import store from "@/redux/store";
 import { RadioGroup } from "@radix-ui/react-radio-group";
 import axios from "axios";
 import { Loader2 } from "lucide-react";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const Login = () => {
   const [input, setInput] = useState({
@@ -17,7 +18,7 @@ const Login = () => {
     role: "",
   });
 
-  const loading = useSelector(store => store.auth);
+  const {loading} = useSelector(store => store.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -81,7 +82,7 @@ const Login = () => {
               <Input
                 type="radio"
                 name="role"
-                value="Student"
+                value="student"
                 checked={input.role === "Student"}
                 onChange={handleChange}
                 className="cursor-pointer h-5 w-5"
@@ -92,7 +93,7 @@ const Login = () => {
               <Input
                 type="radio"
                 name="role"
-                value="Recruiter"
+                value="recruiter"
                 checked={input.role === "Recruiter"}
                 onChange={handleChange}
                 className="cursor-pointer h-5 w-5"
