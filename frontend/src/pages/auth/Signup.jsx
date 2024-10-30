@@ -122,9 +122,9 @@ const Signup = () => {
                 type="radio"
                 name="role"
                 value="student"
-                checked={input.role === "Student"}
+                checked={input.role.toLowerCase() === "student"}
                 onChange={handleChange}
-                className="cursor-pointer"
+                className="cursor-pointer h-5 w-5"
               />
               <Label htmlFor="option-one">Student</Label>
             </div>
@@ -133,9 +133,9 @@ const Signup = () => {
                 type="radio"
                 name="role"
                 value="recruiter"
-                checked={input.role === "Recruiter"}
+                checked={input.role.toLowerCase() === "recruiter"}
                 onChange={handleChange}
-                className="cursor-pointer"
+                className="cursor-pointer h-5 w-5"
               />
               <Label htmlFor="option-two">Recruiter</Label>
             </div>
