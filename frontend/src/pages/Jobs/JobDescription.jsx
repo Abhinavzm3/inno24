@@ -54,12 +54,16 @@ const JobDescription = () => {
         });
         if (res.data.success) {
           dispatch(setSingleJob(res.data.job));
+          setIsApplied(
+            res.data.job.applications.some(
+              (application) => application.applicant === user?._id
+            )
+          ); // Ensure the state is in sync with fetched data
         }
       } catch (error) {
         console.log(error);
       }
     };
-
     fetchSingleJob();
   }, [jobId, dispatch, user?._id]);
 

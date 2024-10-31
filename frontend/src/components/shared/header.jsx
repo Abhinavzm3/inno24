@@ -13,23 +13,25 @@ import { toast } from "sonner";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const {user} =useSelector(store => store.auth);
+  const { user } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const logoutHandler = async () => {
     try {
-      const res = await axios.get(`${USER_API_END_POINT}/logout`, {withCredentials:true});
-      if(res.data.success){
+      const res = await axios.get(`${USER_API_END_POINT}/logout`, {
+        withCredentials: true,
+      });
+      if (res.data.success) {
         dispatch(setUser(null));
         navigate("/");
         toast.success(res.data.message);
       }
     } catch (error) {
       console.log(error);
-      toast.error(error.response.data.message); 
+      toast.error(error.response.data.message);
     }
-  }
+  };
 
   return (
     <nav className="flex items-center justify-between bg-gray-900 bg-opacity-80 p-5 shadow-lg sticky h-16 z-50 ">
@@ -42,26 +44,43 @@ const Header = () => {
 
       {/* Desktop Navigation Links */}
       <ul className="hidden md:flex font-medium items-center gap-5">
-        <li>
-          <Link to="/">
-            <Button variant="link">Home</Button>
-          </Link>
-        </li>
-        <li>
-          <Link to="/jobs">
-            <Button variant="link">Jobs</Button>
-          </Link>
-        </li>
-        <li>
-          <Link to="/browse">
-            <Button variant="link">Browse</Button>
-          </Link>
-        </li>
-        <li>
-          <Link to="/our-team">
-            <Button variant="link">Our Team</Button>
-          </Link>
-        </li>
+        {user && user.role === "recruiter" ? (
+          <>
+            <li>
+              <Link to="/admin/companies">
+                <Button variant="link">Companies</Button>
+              </Link>
+            </li>
+            <li>
+              <Link to="/admin/jobs">
+                <Button variant="link">Jobs</Button>
+              </Link>
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <Link to="/">
+                <Button variant="link">Home</Button>
+              </Link>
+            </li>
+            <li>
+              <Link to="/jobs">
+                <Button variant="link">Jobs</Button>
+              </Link>
+            </li>
+            <li>
+              <Link to="/browse">
+                <Button variant="link">Browse</Button>
+              </Link>
+            </li>
+            <li>
+              <Link to="/our-team">
+                <Button variant="link">Our Team</Button>
+              </Link>
+            </li>
+          </>
+        )}
       </ul>
 
       {/* User Avatar (Visible on all screen sizes) */}
@@ -76,7 +95,7 @@ const Header = () => {
             <PopoverContent className="w-80 translate-y-1">
               <div className="flex gap-4 space-y-2">
                 <Avatar className="cursor-pointer">
-                  <AvatarImage src="{user?.profile?.profilePhoto}" />
+                  <AvatarImage src={user?.profile?.profilePhoto} />
                 </Avatar>
                 <div>
                   <h4 className="font-medium">{user?.fullname}</h4>
@@ -86,13 +105,19 @@ const Header = () => {
                 </div>
               </div>
               <div className="flex flex-col gap-3 text-gray-300 my-2">
-                <div className="flex w-fit items-center gap-2 cursor-pointer">
-                  <User2 />
-                  <Button variant="link"><Link to="/profile">View Profile</Link></Button>
-                </div>
+                {user && user.role === "student" && (
+                  <div className="flex w-fit items-center gap-2 cursor-pointer">
+                    <User2 />
+                    <Button variant="link">
+                      <Link to="/profile">View Profile</Link>
+                    </Button>
+                  </div>
+                )}
                 <div className="flex w-fit items-center gap-2 cursor-pointer">
                   <LogOut />
-                  <Button onClick={logoutHandler} variant="outline">Logout</Button>
+                  <Button onClick={logoutHandler} variant="outline">
+                    Logout
+                  </Button>
                 </div>
               </div>
             </PopoverContent>

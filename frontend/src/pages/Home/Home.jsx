@@ -6,19 +6,28 @@ import CategoryCarousel from "./CategoryCarousel";
 import TestimonialCarousel from "./TestimonialCarousel";
 import useGetAllJobs from "../hooks/useGetAllJobs";
 import LatestJobs from "../Jobs/LatestJobs";
-
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const avengerImages = [
-  "/images/_947f2c86-07ef-411d-a1d0-14f647879ced.jpg",
-  "/images/_5424fdd7-5637-4f14-921f-aef375c71fa8.jpg",
-  "/images/_2283954d-b914-4e7c-8d3e-0aa67e714a91.jpg",
-  "/images/_39a8c2e8-934d-4961-83b8-64ec863acffd.jpg",
-  "/images/_df4ed7ae-2182-49ad-902f-f04dddd1f9b0.jpg",
+  "/images/_947f2c86-07ef-411d-a1d0-14f647879ced.jpg", // Avenger_image5
+  "/images/_5424fdd7-5637-4f14-921f-aef375c71fa8.jpg", // Avengers_image6
+  "/images/_2283954d-b914-4e7c-8d3e-0aa67e714a91.jpg", // Avengers_image7
+  "/images/_39a8c2e8-934d-4961-83b8-64ec863acffd.jpg", // Avengers_image2
+  "/images/_df4ed7ae-2182-49ad-902f-f04dddd1f9b0.jpg", // Avengers_image9
 ];
 
 const Home = () => {
 
   useGetAllJobs();
+  const { user } = useSelector((store) => store.auth);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (user?.role === "recruiter") {
+      navigate("/admin/companies");
+    }
+  }, []);
+
   const [currentImage, setCurrentImage] = useState(0);
 
   useEffect(() => {
@@ -124,8 +133,7 @@ const Home = () => {
             Hero Testimonials
           </h2>
 
-
-         <TestimonialCarousel />
+          <TestimonialCarousel />
           {/* </section> */}
 
           {/* <section className="py-20 bg-gray-900 text-white"> */}

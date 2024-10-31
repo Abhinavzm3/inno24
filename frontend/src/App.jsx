@@ -10,6 +10,7 @@ import OurTeam from "./pages/OurTeam";
 import Browse from "./pages/Browse/Browse";
 import Profile from "./pages/Profile/Profile";
 import JobDescription from "./pages/Jobs/JobDescription";
+import Companies from "./pages/admin/Companies";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,19 @@ const router = createBrowserRouter([
         path: "/profile",
         element: <Profile />,
       },
+
+      // admins ke liye yaha se start hoga 
+
+      {
+        path: "/admin/companies",
+        element: <Companies />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
+
+    
     ],
   },
 ]);

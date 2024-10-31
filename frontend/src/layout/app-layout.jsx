@@ -1,3 +1,4 @@
+import Cursor from "@/components/Cursor";
 import Header from "@/components/shared/header";
 import { Outlet } from "react-router-dom";
 
@@ -6,6 +7,7 @@ const AppLayout = () => {
     <div>
       <div className="grid-background"></div>
       <main className="min-h-screen">
+        <Cursor />
         <Header />
         <Outlet />
       </main>
