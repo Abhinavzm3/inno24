@@ -11,6 +11,9 @@ import Browse from "./pages/Browse/Browse";
 import Profile from "./pages/Profile/Profile";
 import JobDescription from "./pages/Jobs/JobDescription";
 import Companies from "./pages/admin/Companies";
+import CompanyCreate from "./pages/admin/CompanyCreate";
+import CompanySetup from "./pages/admin/CompanySetup";
+import AdminJobs from "./pages/admin/AdminJobs";
 
 const router = createBrowserRouter([
   {
@@ -56,11 +59,17 @@ const router = createBrowserRouter([
         element: <Companies />,
       },
       {
-        path: "/profile",
-        element: <Profile />,
+        path: "/admin/companies/create",
+        element: <CompanyCreate />,
       },
-
-    
+      {
+        path: "/admin/companies/:id",
+        element: <CompanySetup />,
+      },
+      {
+        path: "/admin/jobs",
+        element: <AdminJobs />,
+      },
     ],
   },
 ]);
