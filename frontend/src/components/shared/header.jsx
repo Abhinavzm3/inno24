@@ -36,7 +36,7 @@ const Header = () => {
   return (
     <nav className="flex items-center justify-between bg-gray-900 bg-opacity-80 p-5 shadow-lg sticky h-16 z-50 ">
       <div className="flex items-center space-x-2">
-        <img src="src/assets/logo.png" alt="Logo" className="h-20 w-20" />
+        <img src="/images/logo.png" alt="Logo" className="h-20 w-20" />
         <span className="text-white text-lg font-semibold">
           S.T.A.R.K Connect
         </span>
