@@ -19,7 +19,7 @@ const Cursor = () => {
         top: `${position.y}px`,
         width: '3.5rem', // Adjust size as needed
         height: '3.5rem',
-        backgroundImage: "url('/images/Cursor.png')", // Replace with actual path
+        backgroundImage: "url('/images/Cursor.png')",
         backgroundSize: 'cover',
         pointerEvents: 'none',
         transform: 'translate(-50%, -50%)',

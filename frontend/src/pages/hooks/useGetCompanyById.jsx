@@ -1,4 +1,3 @@
-
 import { COMPANY_API_END_POINT } from '@/lib/utils/constant';
 import { setSingleCompany } from '@/redux/companySlice';
 import axios from 'axios'

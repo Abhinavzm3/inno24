@@ -15,6 +15,7 @@ import CompanyCreate from "./pages/admin/CompanyCreate";
 import CompanySetup from "./pages/admin/CompanySetup";
 import AdminJobs from "./pages/admin/AdminJobs";
 import PostJob from "./pages/admin/PostJob";
+import Applicants from "./pages/admin/Applicants";
 
 const router = createBrowserRouter([
   {
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
       {
         path: "/admin/jobs/create",
         element: <PostJob />,
+      },
+      {
+        path: "/admin/jobs/:id/applicants",
+        element: <Applicants />,
       },
     ],
   },
