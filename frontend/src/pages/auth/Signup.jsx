@@ -6,7 +6,7 @@ import { setLoading } from "@/redux/authSlice";
 import { RadioGroup } from "@radix-ui/react-radio-group";
 import axios from "axios";
 import { Loader2 } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -21,7 +21,7 @@ const Signup = () => {
     file: "",
   });
 
-  const { loading } = useSelector(store => store.auth);
+  const { loading, user } = useSelector(store => store.auth);
 
   const navigate = useNavigate();
 
@@ -35,7 +35,7 @@ const Signup = () => {
   };
   const changeEventHandler = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
-}
+  };
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -67,6 +67,12 @@ const Signup = () => {
       dispatch(setLoading(false));
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <div className="flex items-center justify-center max-w-7xl mx-auto">

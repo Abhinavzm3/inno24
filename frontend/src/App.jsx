@@ -16,6 +16,7 @@ import CompanySetup from "./pages/admin/CompanySetup";
 import AdminJobs from "./pages/admin/AdminJobs";
 import PostJob from "./pages/admin/PostJob";
 import Applicants from "./pages/admin/Applicants";
+import ProtectedRoute from "./pages/admin/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -58,7 +59,7 @@ const router = createBrowserRouter([
 
       {
         path: "/admin/companies",
-        element: <Companies />,
+        element: <ProtectedRoute><Companies /></ProtectedRoute>,
       },
       {
         path: "/admin/companies/create",
