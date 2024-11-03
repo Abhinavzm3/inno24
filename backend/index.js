@@ -12,36 +12,47 @@ dotenv.config({});
 
 const app = express();
 
-
-// middleware
+// Middleware
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+// Define allowed origins for CORS
+const allowedOrigins = [
+  "https://inno24.vercel.app",         // Your Vercel deployment URL
+  "https://stark-connect.netlify.app", // Any other frontend URLs you may have
+  "https://stark-connect-seven.vercel.app"
+];
+
+// CORS options configuration
 const corsOptions = {
-   origin: ['https://inno24.vercel.app/'], 
-    // origin:'https://stark-connect.netlify.app',
-    // origin:'https://stark-connect-seven.vercel.app/',
-    credentials:true
-}
+  origin: (origin, callback) => {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true, // Allows cookies to be sent from this backend to frontend
+};
 
-app.get('/',(req,res)=>{
-    res.send("this is backend on 3000 ")
-})
-
+// Apply CORS middleware
 app.use(cors(corsOptions));
 
-const PORT = process.env.PORT || 3000;
+// Root route to confirm server is running
+app.get("/", (req, res) => {
+  res.send("This is backend running on port 3000");
+});
 
-
-// api's
+// API Routes
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/company", companyRoute);
 app.use("/api/v1/job", jobRoute);
 app.use("/api/v1/application", applicationRoute);
 
-
-
-app.listen(PORT,()=>{
-    connectDB();
-    console.log(`Server running at port ${PORT}`);
-})
+// Connect to database and start server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  connectDB(); // Ensure this function properly connects to your database
+  console.log(`Server running at port ${PORT}`);
+});
