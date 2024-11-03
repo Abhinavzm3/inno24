@@ -17,7 +17,7 @@ import AdminJobs from "./pages/admin/AdminJobs";
 import PostJob from "./pages/admin/PostJob";
 import Applicants from "./pages/admin/Applicants";
 import ProtectedRoute from "./pages/admin/ProtectedRoute";
-
+import Error404 from './pages/Error'
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
@@ -51,8 +51,12 @@ const router = createBrowserRouter([
         element: <Browse />,
       },
       {
-        path: "/profile",
+        path: "*",
         element: <Profile />,
+      },
+      {
+        path: "/:error",
+        element: <Error404 />,
       },
 
       // admins ke liye yaha se start hoga 
