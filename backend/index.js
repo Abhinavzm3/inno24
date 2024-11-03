@@ -25,7 +25,7 @@ const corsOptions = {
 }
 
 app.get('/',(req,res)=>{
-    res.send("this is backend on 3000 port")
+    res.send("this is backend on 3000 ")
 })
 
 app.use(cors(corsOptions));
