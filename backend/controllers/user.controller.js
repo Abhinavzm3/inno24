@@ -126,7 +126,7 @@ export const logout = async (req, res) => {
 export const updateProfile = async (req, res) => {
   try {
     const { fullname, email, phoneNumber, bio, skills } = req.body;
-    const userId = req.id; // middleware authentication should set req.id
+    const userId = req.id; // Assuming req.id is set by an auth middleware
 
     let user = await User.findById(userId);
     if (!user) {
@@ -145,12 +145,17 @@ export const updateProfile = async (req, res) => {
 
     // Upload resume to Firebase if a file is provided
     if (req.file) {
-      const fileUri = getDataUri(req.file);
+      const fileBuffer = req.file.buffer; // Get file buffer directly from multer
       const fileName = `${userId}/resumes/${req.file.originalname}`;
       const storageRef = ref(storage, fileName);
 
-      // Upload the file
-      const snapshot = await uploadBytes(storageRef, fileUri.content);
+      // Set the content type from the uploaded file's mimetype
+      const metadata = {
+        contentType: req.file.mimetype || 'application/pdf', // Default to 'application/pdf' if mimetype is undefined
+      };
+
+      // Upload the file with metadata
+      const snapshot = await uploadBytes(storageRef, fileBuffer, metadata);
       const downloadURL = await getDownloadURL(snapshot.ref);
 
       // Save resume details in user profile
@@ -160,6 +165,7 @@ export const updateProfile = async (req, res) => {
 
     await user.save();
 
+    // Return updated user data
     user = {
       _id: user._id,
       fullname: user.fullname,
