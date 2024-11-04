@@ -12,7 +12,7 @@ import { toast } from "sonner";
 const CompanyCreate = () => {
 
     const navigate = useNavigate();
-    const [companyName, setCompanyName] = useState();
+const [companyName, setCompanyName] = useState("");
     const dispatch = useDispatch();
 
     const registerNewCompany = async () => {
