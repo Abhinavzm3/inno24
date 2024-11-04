@@ -18,24 +18,32 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // Define allowed origins for CORS
-const allowedOrigins = [
-  "https://inno24-1.onrender.com",
-  "https://inno24-hivhb6sru-abhinavzm3s-projects.vercel.app",
-  "https://inno24.vercel.app",         // Your Vercel deployment URL
-  "https://stark-connect.netlify.app", // Any other frontend URLs you may have
-  "https://stark-connect-seven.vercel.app"
-];
+// const allowedOrigins = [
+//   "https://inno24-1.onrender.com",
+//   "https://inno24-hivhb6sru-abhinavzm3s-projects.vercel.app",
+//   "https://inno24.vercel.app",         // Your Vercel deployment URL
+//   "https://stark-connect.netlify.app", // Any other frontend URLs you may have
+//   "https://stark-connect-seven.vercel.app"
+// ];
 
 // CORS options configuration
+// const corsOptions = {
+//   origin: (origin, callback) => {
+//     if (allowedOrigins.includes(origin) || !origin) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("Not allowed by CORS"));
+//     }
+//   },
+//   credentials: true, // Allows cookies to be sent from this backend to frontend
+// };
+
+
 const corsOptions = {
-  origin: (origin, callback) => {
-    if (allowedOrigins.includes(origin) || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true, // Allows cookies to be sent from this backend to frontend
+    origin: "https://inno24-1.onrender.com",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
 };
 
 // Apply CORS middleware
