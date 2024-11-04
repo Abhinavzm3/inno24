@@ -43,7 +43,7 @@ app.use(cors(corsOptions));
 
 // Root route to confirm server is running
 app.get("/", (req, res) => {
-  res.send("This is backend running on port 3000");
+  res.send("This is backend running on  3000");
 });
 
 // API Routes
