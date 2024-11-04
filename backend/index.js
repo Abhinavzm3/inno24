@@ -17,7 +17,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-Define allowed origins for CORS
 const allowedOrigins = [
   "https://inno24-1.onrender.com",
 "https://inno24.onrender.com/api/v1/company/register"
