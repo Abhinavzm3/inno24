@@ -23,7 +23,6 @@ const allowedOrigins = [
 "https://inno24.onrender.com/api/v1/company/register"
 ];
 
-CORS options configuration
 const corsOptions = {
   origin: (origin, callback) => {
     if (allowedOrigins.includes(origin) || !origin) {
