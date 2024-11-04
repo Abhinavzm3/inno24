@@ -19,6 +19,7 @@ app.use(cookieParser());
 
 // Define allowed origins for CORS
 const allowedOrigins = [
+  "https://inno24-1.onrender.com",
   "https://inno24-hivhb6sru-abhinavzm3s-projects.vercel.app",
   "https://inno24.vercel.app",         // Your Vercel deployment URL
   "https://stark-connect.netlify.app", // Any other frontend URLs you may have
